@@ -10,7 +10,6 @@ $(function() {
     Math.floor(Math.random() * SIZE) + ',' + Math.floor(Math.random() * SIZE)
     , Math.floor(Math.random() * SIZE) + ',' + Math.floor(Math.random() * SIZE)
   ];
-  initialTiles = ['2,2','3,2'];
 
   var matrix = [];
   // initial tiles
@@ -112,6 +111,7 @@ $(function() {
   function updateUp() {
     for (c = 0; c < SIZE; c++) {
       for (r = 0; r < SIZE; r++) {
+        if (typeof matrix[r+1] == 'undefined') continue;
         if (typeof matrix[r][c] == 'undefined') matrix[r][c] = 0;
         // if the current tile is not empty & is equal to the tile below
         if (matrix[r][c] && matrix[r][c] == matrix[r+1][c]) {
@@ -142,8 +142,12 @@ $(function() {
   function spawn() {
     var row = Math.floor(Math.random() * SIZE);
     var col = Math.floor(Math.random() * SIZE);
-    if (matrix[row][col]) spawn();
+    if (matrix[row][col] > 0) {
+      return spawn();
+    }
+    console.log('new tile position: '+row+','+col);
     updateTileWithNumber(row, col, getRandomNum());
+    return;
   }
 
   function _showMatrix() {
