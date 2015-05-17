@@ -28,6 +28,8 @@ $(function() {
   }
 
   $('body').keyup(function(e) {
+    if ([37, 38, 39, 40].indexOf(e.which) < 0) return;
+
     if (e.which == 37) { // left
       rotateRight();
       moveUp();
@@ -49,6 +51,7 @@ $(function() {
       rotateRight();
       rotateRight();
     }
+    spawn();
     _showMatrix();
   });
 
@@ -109,6 +112,7 @@ $(function() {
   function updateUp() {
     for (c = 0; c < SIZE; c++) {
       for (r = 0; r < SIZE; r++) {
+        if (typeof matrix[r][c] == 'undefined') matrix[r][c] = 0;
         // if the current tile is not empty & is equal to the tile below
         if (matrix[r][c] && matrix[r][c] == matrix[r+1][c]) {
           updateTileWithNumber(r, c, matrix[r][c] * 2);
@@ -133,6 +137,13 @@ $(function() {
         .removeClass()
         .addClass('cell-' + num)
         .text(num == 0 ? '' : num);
+  }
+
+  function spawn() {
+    var row = Math.floor(Math.random() * SIZE);
+    var col = Math.floor(Math.random() * SIZE);
+    if (matrix[row][col]) spawn();
+    updateTileWithNumber(row, col, getRandomNum());
   }
 
   function _showMatrix() {
