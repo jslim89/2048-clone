@@ -103,11 +103,19 @@ $(function() {
         if (typeof matrix[r][c] == 'undefined') matrix[r][c] = 0;
         // if the current tile is not empty & is equal to the tile below
         if (matrix[r][c] && matrix[r][c] == matrix[r+1][c]) {
-          updateTileWithNumber(r, c, matrix[r][c] * 2);
+          var num = matrix[r][c] * 2;
+          updateTileWithNumber(r, c, num);
           updateTileWithNumber(r+1, c, 0);
+          updateScoreForTile(num);
         }
       }
     }
+  }
+
+  function updateScoreForTile(num) {
+    var score = parseInt($('#score').text());
+    score += num;
+    $('#score').text(score);
   }
 
   function getTile(row, col) {
