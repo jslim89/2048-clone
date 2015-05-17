@@ -13,31 +13,36 @@ $(function() {
   $('body').keyup(function(e) {
     if ([37, 38, 39, 40].indexOf(e.which) < 0) return;
 
-    if (e.which == 37) { // left
-      rotateRight();
-      moveUp();
-      rotateRight();
-      rotateRight();
-      rotateRight();
-    } else if (e.which == 38) { // top
-      moveUp();
-    } else if (e.which == 39) { // right
-      rotateRight();
-      rotateRight();
-      rotateRight();
-      moveUp();
-      rotateRight();
-    } else if (e.which == 40) { // bottom
-      rotateRight();
-      rotateRight();
-      moveUp();
-      rotateRight();
-      rotateRight();
-    }
-    spawn();
-    if (isGameOver()) {
-      alert('Game over');
-      resetGame();
+    try {
+      if (e.which == 37) { // left
+        rotateRight();
+        moveUp();
+        rotateRight();
+        rotateRight();
+        rotateRight();
+      } else if (e.which == 38) { // top
+        moveUp();
+      } else if (e.which == 39) { // right
+        rotateRight();
+        rotateRight();
+        rotateRight();
+        moveUp();
+        rotateRight();
+      } else if (e.which == 40) { // bottom
+        rotateRight();
+        rotateRight();
+        moveUp();
+        rotateRight();
+        rotateRight();
+      }
+      spawn();
+      if (isGameOver()) {
+        alert('Game over');
+        resetGame();
+      }
+    } catch (ex) {
+      // do nothing
+      console.log('stackoverflow');
     }
     _showMatrix();
   });
@@ -167,14 +172,25 @@ $(function() {
   }
 
   function isGameOver() {
-    var count = 0;
+    var count = 0, similarSiblingCount = 0;
+
     for (r = 0; r < SIZE; r++) {
       for (c = 0; c < SIZE; c++) {
         if (matrix[r][c] > 0) count++;
+
+        // next row check
+        if (typeof matrix[r+1] != 'undefined') {
+          if (matrix[r][c] == matrix[r+1][c]) similarSiblingCount++;
+        }
+        // next column check
+        if (typeof matrix[r][c+1] != 'undefined') {
+          if (matrix[r][c] == matrix[r][c+1]) similarSiblingCount++;
+        }
       }
     }
+
     if (count == SIZE * SIZE) {
-      return true;
+      return similarSiblingCount < 1;
     }
     return false;
   }
