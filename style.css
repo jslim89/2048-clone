@@ -1,0 +1,76 @@
+.wrapper {
+    margin: auto;
+    width: 768px;
+}
+
+#canvas {
+    margin: auto;
+    background-color: #bbada0;
+    width: 300px;
+    height: 300px;
+    border: 1px solid #ababab;
+    color: #776e65;
+}
+
+#canvas td {
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+    background-color: rgba(238, 228, 218, 0.35);
+    height: 25%;
+    width: 25%;
+}
+#canvas td.cell-2 {
+    background: #eee4da;
+    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0), inset 0 0 0 1px rgba(255, 255, 255, 0);
+}
+#canvas td.cell-4 {
+    background: #ede0c8;
+    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0), inset 0 0 0 1px rgba(255, 255, 255, 0);
+}
+#canvas td.cell-8 {
+    color: #f9f6f2;
+    background: #f2b179;
+}
+#canvas td.cell-16 {
+    color: #f9f6f2;
+    background: #f59563;
+}
+#canvas td.cell-32 {
+    color: #f9f6f2;
+    background: #f67c5f;
+}
+#canvas td.cell-64 {
+    color: #f9f6f2;
+    background: #f65e3b;
+}
+#canvas td.cell-128 {
+    color: #f9f6f2;
+    background: #edcf72;
+    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.2381), inset 0 0 0 1px rgba(255, 255, 255, 0.14286);
+    font-size: 25px;
+}
+#canvas td.cell-256 {
+    color: #f9f6f2;
+    background: #edcc61;
+    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.31746), inset 0 0 0 1px rgba(255, 255, 255, 0.19048);
+    font-size: 25px;
+}
+#canvas td.cell-512 {
+    color: #f9f6f2;
+    background: #edc850;
+    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.39683), inset 0 0 0 1px rgba(255, 255, 255, 0.2381);
+    font-size: 25px;
+}
+#canvas td.cell-1024 {
+    color: #f9f6f2;
+    background: #edc53f;
+    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.47619), inset 0 0 0 1px rgba(255, 255, 255, 0.28571);
+    font-size: 20px;
+}
+#canvas td.cell-2048 {
+    color: #f9f6f2;
+    background: #edc22e;
+    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0.55556), inset 0 0 0 1px rgba(255, 255, 255, 0.33333);
+    font-size: 20px;
+}
