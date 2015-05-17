@@ -6,25 +6,9 @@ const SIZE = 4;
 
 $(function() {
 
-  var initialTiles = [
-    Math.floor(Math.random() * SIZE) + ',' + Math.floor(Math.random() * SIZE)
-    , Math.floor(Math.random() * SIZE) + ',' + Math.floor(Math.random() * SIZE)
-  ];
-
   var matrix = [];
-  // initial tiles
-  for (r = 0; r < SIZE; r++) {
-    matrix[r] = [];
-    for (c = 0; c < SIZE; c++) {
-      var tileIndex = r + ',' + c;
-      if (initialTiles.indexOf(tileIndex) >= 0) {
-        var rand = getRandomNum();
-        updateTileWithNumber(r, c, rand);
-        continue;
-      }
-      updateTileWithNumber(r, c, 0);
-    }
-  }
+
+  resetGame();
 
   $('body').keyup(function(e) {
     if ([37, 38, 39, 40].indexOf(e.which) < 0) return;
@@ -51,6 +35,10 @@ $(function() {
       rotateRight();
     }
     spawn();
+    if (isGameOver()) {
+      alert('Game over');
+      resetGame();
+    }
     _showMatrix();
   });
 
@@ -148,6 +136,39 @@ $(function() {
     console.log('new tile position: '+row+','+col);
     updateTileWithNumber(row, col, getRandomNum());
     return;
+  }
+
+  function resetGame() {
+    var initialTiles = [
+      Math.floor(Math.random() * SIZE) + ',' + Math.floor(Math.random() * SIZE)
+      , Math.floor(Math.random() * SIZE) + ',' + Math.floor(Math.random() * SIZE)
+    ];
+    // initial tiles
+    for (r = 0; r < SIZE; r++) {
+      matrix[r] = [];
+      for (c = 0; c < SIZE; c++) {
+        var tileIndex = r + ',' + c;
+        if (initialTiles.indexOf(tileIndex) >= 0) {
+          var rand = getRandomNum();
+          updateTileWithNumber(r, c, rand);
+          continue;
+        }
+        updateTileWithNumber(r, c, 0);
+      }
+    }
+  }
+
+  function isGameOver() {
+    var count = 0;
+    for (r = 0; r < SIZE; r++) {
+      for (c = 0; c < SIZE; c++) {
+        if (matrix[r][c] > 0) count++;
+      }
+    }
+    if (count == SIZE * SIZE) {
+      return true;
+    }
+    return false;
   }
 
   function _showMatrix() {
